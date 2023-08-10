@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from agency.models import Topic
+
+
+@admin.register(Topic)
+class TopicAdmin(admin.ModelAdmin):
+    list_display = ["name"]
