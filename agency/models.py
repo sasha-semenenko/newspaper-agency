@@ -13,7 +13,7 @@ class Topic(models.Model):
 
 
 class Redactor(AbstractUser):
-    years_of_experience = models.IntegerField()
+    years_of_experience = models.IntegerField(default=0)
 
     class Meta:
         ordering = ["username"]
@@ -23,7 +23,7 @@ class Redactor(AbstractUser):
 class Newspaper(models.Model):
     title = models.CharField(max_length=63)
     content = models.TextField(max_length=500)
-    published_date = models.DateTimeField()
+    published_date = models.DateField()
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     publishers = models.ManyToManyField(Redactor)
 
