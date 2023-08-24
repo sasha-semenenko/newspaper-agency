@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Redactors List</h1>
+  <table class="new-table">
+
+    <tr class="table">
+      <th class="table-line">Username</th>
+      <th class="table-line">First name</th>
+      <th class="table-line">Last name</th>
+    </tr>
+
+    {% for redactor in redactor_list %}
+      <tr class="table">
+        <td class="redactor-line"><a href="{% url 'agency:redactor-detail' pk=redactor.id%}">{{ redactor.username }}</a></td>
+        <td class="redactor-line">{{ redactor.first_name }}</td>
+        <td class="redactor-line">{{ redactor.last_name }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

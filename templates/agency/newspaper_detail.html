@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Topic of the Newspaper</h1>
+  <p>Name: {{ newspaper.topic.name }}</p>
+
+  <h1>Information about all redactors of the newspaper</h1>
+  {% for publisher in newspaper.publishers.all %}
+    <ul class="publisher-inline">
+      <li class="publisher-inline">Username: {{ publisher.username }}</li>
+      <li class="publisher-inline">First name: {{ publisher.first_name }}</li>
+      <li class="publisher-inline">Last name: {{ publisher.last_name }}</li>
+      <li class="publisher-inline">Years_of_experience: {{ publisher.years_of_experience }}</li>
+    </ul>
+  {% endfor %}
+
+{% endblock %}

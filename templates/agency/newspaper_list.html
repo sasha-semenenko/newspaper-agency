@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>
+    Newspaper List
+    <a style="float: right" href="{% url 'agency:newspaper-create' %}">Create</a>
+  </h1>
+  <br>
+  {% for newspaper in newspaper_list %}
+    <ul class="newspaper-list">
+      <li class="newspaper-list-inline"><a href="{% url 'agency:newspaper-detail' pk=newspaper.id%}">{{ newspaper.title }}</a></li>
+    </ul>
+
+  {% endfor %}
+
+{% endblock %}

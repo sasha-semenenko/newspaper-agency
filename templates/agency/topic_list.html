@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>
+    Topic List
+    <a href="{% url 'agency:topic-create' %}">Create</a>
+  </h1>
+  <table>
+
+    {% if topic_list %}
+
+      <tr class="table-row">
+        <th class="table-header">ID</th>
+        <th class="table-header">Name</th>
+        <th class="table-header">Update</th>
+        <th class="table-header">Delete</th>
+      </tr>
+
+    {% endif %}
+
+    {% for topic in topic_list %}
+
+        <tr class="table-row">
+          <td class="table-cell">{{ topic.id }}</td>
+          <td class="table-cell">{{ topic.name }}</td>
+          <td class="table-cell"><a href="{% url 'agency:topic-update' pk=topic.id%}">Update</a></td>
+          <td class="table-cell"><a href="{% url 'agency:topic-delete' pk=topic.id%}">Delete</a></td>
+        </tr>
+
+    {% endfor %}
+  </table>
+{% endblock %}

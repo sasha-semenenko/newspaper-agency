@@ -1,0 +1,15 @@
+<ul class="content-sidebar">
+
+  {% if user.is_authenticated %}
+    <p>User: {{ user.username }}</p>
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a>
+  {% endif %}
+  <br>
+
+  <li class="content-row"><a href="{% url 'agency:index' %}">Home</a></li>
+  <li class="content-row"><a href="{% url 'agency:topics' %}">Topics</a></li>
+  <li class="content-row"><a href="{% url 'agency:newspaper' %}">Newspaper</a></li>
+  <li class="content-row"><a href="{% url 'agency:redactors' %}">Redactors</a></li>
+</ul>

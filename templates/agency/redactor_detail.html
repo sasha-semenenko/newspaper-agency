@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Information about all redactors of the newspaper</h1>
+  <ul class="redactor-list">
+    <li class="redactor-list-inline">Redactor username: {{ redactor.username }}</li>
+    <li class="redactor-list-inline">Redactor first name: {{ redactor.first_name }}</li>
+    <li class="redactor-list-inline">Redactor last name: {{ redactor.last_name }}</li>
+    <li class="redactor-list-inline">Redactor years of experience: {{ redactor.years_of_experience }}</li>
+  </ul>
+  <h2>Newspapers of the redactor</h2>
+  {% for redactor in redactor.newspaper_set.all %}
+    <li>Topic: {{ redactor.topic.name }}</li>
+    {% empty %}
+    <p>There are no newspapers!</p>
+  {% endfor %}
+  
+{% endblock %}

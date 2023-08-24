@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Home page</title>
+{% endblock %}
+
+{% block content %}
+
+    <h1>Welcome to the best Agency Ever!</h1>
+    <ul>
+        <li>Topic: {{ num_topic }}</li>
+        <li>Newspapers: {{ num_newspapers }}</li>
+        <li>Redactors: {{ num_redactors }}</li>
+    </ul>
+
+{% endblock %}
