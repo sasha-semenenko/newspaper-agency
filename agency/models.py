@@ -22,7 +22,7 @@ class Redactor(AbstractUser):
 
 class Newspaper(models.Model):
     title = models.CharField(max_length=63)
-    content = models.TextField(max_length=500)
+    content = models.TextField()
     published_date = models.DateField()
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     publishers = models.ManyToManyField(Redactor)
