@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Information about all redactors of the newspaper</h1>
-  <ul class="redactor-list">
-    <li class="redactor-list-inline">Redactor username: {{ redactor.username }}</li>
-    <li class="redactor-list-inline">Redactor first name: {{ redactor.first_name }}</li>
-    <li class="redactor-list-inline">Redactor last name: {{ redactor.last_name }}</li>
-    <li class="redactor-list-inline">Redactor years of experience: {{ redactor.years_of_experience }}</li>
-  </ul>
-  <h2>Newspapers of the redactor</h2>
+  <h1>
+    <strong>Username:</strong> {{ user.username }}
+    <a href="{% url 'agency:redactor-delete' pk=redactor.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'agency:redactor-experience-update' pk=redactor.id %}" class="btn btn-success">Update</a>
+  </h1>
+  <p><strong>First name:</strong> {{ user.first_name }}</p>
+  <p><strong>Last name:</strong> {{ user.last_name }}</p>
+  <p><strong>Years of experience:</strong> {{ user.years_of_experience }}</p>
+  <h2>Newspapers</h2>
   {% for redactor in redactor.newspaper_set.all %}
-    <li>Topic: {{ redactor.topic.name }}</li>
+    <p>Topic name: {{ redactor.topic.name }}</p>
     {% empty %}
     <p>There are no newspapers!</p>
   {% endfor %}
-  
+
 {% endblock %}

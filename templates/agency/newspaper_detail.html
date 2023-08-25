@@ -2,17 +2,45 @@
 
 {% block content %}
 
-  <h1>Topic of the Newspaper</h1>
-  <p>Name: {{ newspaper.topic.name }}</p>
+  <h1>
+    {{ newspaper.title }}
 
-  <h1>Information about all redactors of the newspaper</h1>
-  {% for publisher in newspaper.publishers.all %}
-    <ul class="publisher-inline">
+
+  </h1>
+  <p>
+    Topic name: {{ newspaper.topic.name }}
+  </p>
+
+  <h2>
+    Newspapers
+    <form action="{% url 'agency:newspaper-update-redactor' pk=newspaper.id %}" method="post">
+      {% csrf_token %}
+      {% if user in newspaper.publishers.all %}
+        <input
+            type="submit"
+            value="Delete me from this newspaper"
+            style="background-color: red"
+            class="btn btn-secondary link to page">
+      {% else %}
+        <input
+            type="submit"
+            value="Assign me to this newspaper"
+            style="background-color: green"
+            class="btn btn-secondary link to page">
+      {% endif %}
+
+    </form>
+  </h2>
+  <ul class="publisher-list">
+    {% for publisher in newspaper.publishers.all %}
       <li class="publisher-inline">Username: {{ publisher.username }}</li>
       <li class="publisher-inline">First name: {{ publisher.first_name }}</li>
       <li class="publisher-inline">Last name: {{ publisher.last_name }}</li>
       <li class="publisher-inline">Years_of_experience: {{ publisher.years_of_experience }}</li>
-    </ul>
-  {% endfor %}
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'agency:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">Delete</a>
+  <a href="{% url 'agency:newspaper-update' pk=newspaper.id %}" class="btn btn-success link-to-page">Update</a>
 
 {% endblock %}

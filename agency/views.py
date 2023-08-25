@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
+from agency.forms import NewspaperForm, RedactorCreationForm, RedactorExperienceUpdateForm
 from agency.models import Topic, Newspaper, Redactor
 
 
@@ -65,13 +66,13 @@ class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
-    fields = "__all__"
+    form_class = NewspaperForm
     success_url = reverse_lazy("agency:newspaper")
 
 
 class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
-    fields = "__all__"
+    form_class = NewspaperForm
     success_url = reverse_lazy("agency:newspaper")
 
 
@@ -79,3 +80,31 @@ class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Newspaper
     template_name = "agency/newspaper_confirm_delete.html"
     success_url = reverse_lazy("agency:newspaper")
+
+
+class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Redactor
+    form_class = RedactorCreationForm
+
+
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Redactor
+    success_url = reverse_lazy("agency:redactors")
+
+
+class RedactorExperienceUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Redactor
+    form_class = RedactorExperienceUpdateForm
+    template_name = "agency/redactor_update.html"
+    success_url = reverse_lazy("agency:redactors")
+
+
+class NewspaperUpdateRedactorView(LoginRequiredMixin, generic.UpdateView):
+    def post(self, request, *args, **kwargs):
+        redactor = request.user
+        newspaper = get_object_or_404(Newspaper, pk=kwargs["pk"])
+        if redactor in newspaper.publishers.all():
+            newspaper.publishers.remove(redactor)
+        else:
+            newspaper.publishers.add(redactor)
+        return redirect("agency:newspaper-detail", pk=kwargs["pk"])
