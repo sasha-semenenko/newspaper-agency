@@ -3,8 +3,9 @@
 {% block content %}
   <h1>
     Newspaper List
-    <a style="float: right" href="{% url 'agency:newspaper-create' %}" class="btn btn-primary">Create</a>
+    <a href="{% url 'agency:newspaper-create' %}" class="btn btn-primary">Create</a>
   </h1>
+  {% include 'includes/search_form.html' %}
   <br>
   {% for newspaper in newspaper_list %}
     <ul class="newspaper-list">

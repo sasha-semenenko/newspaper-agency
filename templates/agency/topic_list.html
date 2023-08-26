@@ -4,8 +4,9 @@
 
   <h1>
     Topic List
-    <a href="{% url 'agency:topic-create' %}">Create</a>
+    <a href="{% url 'agency:topic-create' %}" class="btn btn-primary">Create</a>
   </h1>
+  {% include 'includes/search_form.html' %}
   <table>
 
     {% if topic_list %}
