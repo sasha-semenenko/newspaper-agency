@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from agency.models import Redactor, Newspaper
+from agency.models import Redactor, Newspaper, Topic
 
 
 class RedactorCreationForm(UserCreationForm):
@@ -13,26 +13,20 @@ class RedactorCreationForm(UserCreationForm):
 
 
 class RedactorExperienceUpdateForm(forms.ModelForm):
-    years_of_experience = forms.IntegerField()
 
     class Meta:
         model = Redactor
-        fields = ("years_of_experience",)
-
-    def clean_experience_number(self):
-        years_of_experience = self.cleaned_data["years_of_experience"]
-
-        if not years_of_experience.isdigit():
-            raise ValidationError("Experience should be a digit number")
-
-        if years_of_experience > 35:
-            raise ValidationError("Experience should be less than 35")
-        return years_of_experience
+        fields = ("years_of_experience", "first_name", "last_name",)
 
 
 class NewspaperForm(forms.ModelForm):
     newspapers = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
+        widget=forms.CheckboxSelectMultiple(),
+        required=False
+    )
+    topic = forms.ModelMultipleChoiceField(
+        queryset=Topic.objects.all(),
         widget=forms.CheckboxSelectMultiple(),
         required=False
     )

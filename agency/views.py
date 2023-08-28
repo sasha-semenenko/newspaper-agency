@@ -3,8 +3,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from agency.forms import NewspaperForm, RedactorCreationForm, RedactorExperienceUpdateForm, TopicNameSearchForm, \
-    NewspaperTitleSearchForm, RedactorUsernameSearchForm
+from agency.forms import (NewspaperForm,
+                          RedactorCreationForm,
+                          RedactorExperienceUpdateForm,
+                          TopicNameSearchForm,
+                          NewspaperTitleSearchForm,
+                          RedactorUsernameSearchForm)
 from agency.models import Topic, Newspaper, Redactor
 
 
