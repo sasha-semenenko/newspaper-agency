@@ -65,6 +65,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "agency.context_processors.cfg_assets_root",
             ],
         },
     },
@@ -107,6 +108,8 @@ AUTH_USER_MODEL = "agency.Redactor"
 LOGIN_REDIRECT_URL = "/"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+ASSETS_ROOT = "/static"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
