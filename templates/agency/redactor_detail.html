@@ -22,7 +22,9 @@
           <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{{ ASSETS_ROOT }}/assets/img/team-4.jpg">
           <div class="pb-3 mb-0 small lh-sm border-bottom">
             <p class="d-block text-gray-dark text-3xl"><b>Username:</b><i>{{ redactor.username }}</i></p>
-            <p class="d-block text-gray-dark text-3xl"><b>Email: </b><i>{{ redactor.email }}</i></p>
+            {% if redactor.email %}
+              <p class="d-block text-gray-dark text-3xl"><b>Email: </b><i>{{ redactor.email }}</i></p>
+            {% endif %}
             <p class="d-block text-gray-dark text-3xl"><b>First name: </b><i>{{ redactor.first_name }}</i></p>
             <p class="d-block text-gray-dark text-3xl"><b>Last name: </b><i>{{ redactor.last_name }}</i></p>
             <p class="d-block text-gray-dark text-3xl"><b>Years of experience: </b><i>{{ redactor.years_of_experience }}</i></p>

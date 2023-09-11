@@ -1,13 +1,32 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %} Delete Topic {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} blog-author bg-gray-100 {% endblock body_class %}
 
 {% block content %}
-  <h1>Topic delete!</h1>
-  <p>Are you sure you want to delete topic: {{ topic.name }}</p>
-  <p>All newspapers with this topic will be also deleted</p>
 
-  <form action="" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Yes, delete" class="btn btn-danger">
-  </form>
+  {% include "includes/navigation.html" %}
 
-{% endblock %}
+  <section class="py-sm-7 py-5 position-relative" style="background-color: palegreen">
+    <div class="container">
+      <div class="row">
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4" style="text-align: center">
+              <h1 >Delete Topic</h1>
+              <p>Are you sure you want to delete topic: <strong>{{ topic.name }}</strong></p>
+              <p>All newspapers with this topic will be also deleted</p>
+              <form action="" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Yes, delete" class="btn btn-danger">
+              </form>
+            </div>
+          </div>
+        </div>
+  </section>
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}
