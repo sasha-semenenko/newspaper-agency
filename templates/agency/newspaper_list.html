@@ -1,17 +1,37 @@
 {% extends 'base.html' %}
 
+{% block title %} Newspaper list {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} blog-author bg-gray-100 {% endblock body_class %}
+
 {% block content %}
-  <h1>
-    Newspaper List
-    <a href="{% url 'agency:newspaper-create' %}" class="btn btn-primary">Create</a>
-  </h1>
-  {% include 'includes/search_form.html' %}
-  <br>
-  {% for newspaper in newspaper_list %}
-    <ul class="newspaper-list">
-      <li class="newspaper-list-inline"><a href="{% url 'agency:newspaper-detail' pk=newspaper.id%}">{{ newspaper.title }}</a></li>
-    </ul>
 
-  {% endfor %}
+  {% include "includes/navigation.html" %}
 
-{% endblock %}
+  <section class="py-sm-7 py-5 position-relative" style="background-color: palevioletred">
+    <div class="container">
+      <div class="row">
+            <div class="col-lg-3 col-md-5 position-relative my-auto">
+              <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{{ ASSETS_ROOT }}/assets/img/down-arrow-dark.svg">
+              <a href="{% url 'agency:newspaper-create' %}" class="btn btn-primary">Create new newspaper</a>
+            </div>
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              <h1 style="text-align: center">
+                List of the newspapers
+              </h1>
+              {% include 'includes/search_form.html' %}
+              {% for newspaper in newspaper_list %}
+                <ul class="newspaper-list">
+                  <li class="newspaper-list-inline"><a href="{% url 'agency:newspaper-detail' pk=newspaper.id%}">{{ newspaper.title }}</a></li>
+                </ul>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+  </section>
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}
