@@ -122,6 +122,7 @@ class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
     model = Redactor
     form_class = RedactorCreationForm
+    success_url = reverse_lazy("agency:redactors")
 
 
 class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
