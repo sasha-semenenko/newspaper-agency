@@ -59,6 +59,7 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
             return self.queryset.filter(title__icontains=form.cleaned_data["title"])
         return self.queryset
 
+
 class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
     model = Newspaper
 
@@ -77,6 +78,7 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
         if form.is_valid():
             return queryset.filter(username__icontains=form.cleaned_data["username"])
         return queryset
+
 
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor

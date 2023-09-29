@@ -16,7 +16,13 @@ python3 -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 python manage.py migrate
+# Use the following command to load prepared data from fixture to test and debug your code:
+python manage.py loaddata fixture_data.json
+# After loading data from fixture you can use following superuser (or create another one by yourself):
+Login: admin
+Password: newspaper_agency
 python manage.py runserver # Starts Django Server
+
 ```
 
 ## Features

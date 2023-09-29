@@ -20,6 +20,7 @@ class Redactor(AbstractUser):
         verbose_name = "redactor"
         verbose_name_plural = "redactors"
 
+
 class Newspaper(models.Model):
     title = models.CharField(max_length=63)
     content = models.TextField()

@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from django.core.exceptions import ValidationError
 
 from agency.models import Redactor, Newspaper, Topic
 
@@ -13,19 +12,14 @@ class RedactorCreationForm(UserCreationForm):
 
 
 class RedactorExperienceUpdateForm(forms.ModelForm):
-
     class Meta:
         model = Redactor
         fields = ("years_of_experience", "first_name", "last_name",)
 
 
 class NewspaperForm(forms.ModelForm):
-    newspapers = forms.ModelMultipleChoiceField(
-        queryset=get_user_model().objects.all(),
-        widget=forms.CheckboxSelectMultiple(),
-        required=False
-    )
-    topic = forms.ModelMultipleChoiceField(
+
+    other_topic = forms.ModelMultipleChoiceField(
         queryset=Topic.objects.all(),
         widget=forms.CheckboxSelectMultiple(),
         required=False
