@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ newspaper.title }} {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} blog-author bg-gray-100 {% endblock body_class %}
+
+{% block content %}
+
+  {% include "includes/navigation.html" %}
+
+  <section class="py-sm-7 py-5 position-relative" style="background-color: palevioletred">
+    <div class="container">
+      <div class="row">
+        <h1 style="text-align: center">{{ newspaper.title }}</h1>
+      </div>
+      <form class="text-black-50" method="post" action="{% url 'agency:newspaper-update-redactor' pk=newspaper.id %}">
+        {% csrf_token %}
+        <div>
+          <div>
+            This article on the topic <strong>{{ newspaper.topic.name }}</strong> was published by
+            {% for user in newspaper.publishers.all %}
+              <strong>{{ user.first_name }} {{ user.last_name }}</strong> at {{ newspaper.published_date }}
+            {% endfor %}
+          </div>
+
+        </div>
+        {% if user in newspaper.publishers.all %}
+          <input
+              type="submit"
+              value="Delete me from this newspaper"
+              style="background-color: red"
+              class="btn btn-secondary link to page">
+        {% else %}
+          <input
+              type="submit"
+              value="Assign me to this newspaper"
+              style="background-color: green"
+              class="btn btn-secondary link to page">
+        {% endif %}
+        <a href="{% url 'agency:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">Delete Newspaper</a>
+        <a href="{% url 'agency:newspaper-update' pk=newspaper.id %}" class="btn btn-success link-to-page">Update Newspaper</a>
+      </form>
+
+      <div class="container">
+        <div class="d-flex justify-content-center">
+          <div class="alert alert-light m-2 text-lg-center">
+            <p class="text-black-50">{{ newspaper.content }}</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} Topic list {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} blog-author bg-gray-100 {% endblock body_class %}
+
+{% block content %}
+
+  {% include "includes/navigation.html" %}
+
+  <section class="py-sm-7 py-5 position-relative" style="background-color: palegreen">
+    <div class="container">
+      <div class="row">
+            <div class="col-lg-3 col-md-5 position-relative my-auto">
+              <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{{ ASSETS_ROOT }}/assets/img/down-arrow-dark.svg">
+              <a href="{% url 'agency:topic-create' %}" class="btn btn-primary">Create new topic</a>
+            </div>
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              <h1 style="text-align: center">
+                List of the redactors
+              </h1>
+              {% include 'includes/search_form.html' %}
+
+              <div class="container">
+                <div class="text-center">
+                  {% for topic in topic_list %}
+                    <div class="block">
+                      <h3>{{ topic.name }}</h3>
+                      <div class="list">
+                        <a href="{% url 'agency:topic-update' pk=topic.id%}">Update</a>
+                        <a href="{% url 'agency:topic-delete' pk=topic.id%}">Delete</a>
+                      </div>
+                      <hr>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </section>
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}
